@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="text-2xl font-extrabold text-white">Supabase Auth</div>
         <nav class="flex items-center">
           <RouterLink to="/" class="text-white mx-4 font-semibold">Home (UnProtected)</RouterLink>
-          <RouterLink to="/" class="text-white mx-4 font-semibold">Auth (UnProtected)</RouterLink>
+          <RouterLink to="/auth" class="text-white mx-4 font-semibold">Auth (UnProtected)</RouterLink>
           <RouterLink to="/" class="text-white mx-4 font-semibold">Profile (Protected)</RouterLink>
         </nav>
       </div>
