@@ -1,5 +1,21 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import { supabaseClient } from './supabase'
+
+const authUser = ref();
+const router = useRouter();
+onMounted(() => {
+  supabaseClient.auth.onAuthStateChange((_, _session) => {
+    if (_session) {
+      authUser.value = _session.user
+      router.push('/profile')
+    } else {
+      authUser.value = undefined;
+      router.push('/auth');
+    }
+  })
+})
 </script>
 
 <template>
@@ -9,8 +25,8 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="text-2xl font-extrabold text-white">Supabase Auth</div>
         <nav class="flex items-center">
           <RouterLink to="/" class="text-white mx-4 font-semibold">Home (UnProtected)</RouterLink>
-          <RouterLink to="/auth" class="text-white mx-4 font-semibold">Auth (UnProtected)</RouterLink>
-          <RouterLink to="/" class="text-white mx-4 font-semibold">Profile (Protected)</RouterLink>
+          <RouterLink v-if="!authUser" to="/auth" class="text-white mx-4 font-semibold">Auth (UnProtected)</RouterLink>
+          <RouterLink v-else to="/profile" class="text-white mx-4 font-semibold">Profile (Protected)</RouterLink>
         </nav>
       </div>
     </header>

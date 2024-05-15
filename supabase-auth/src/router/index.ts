@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 
 // @ts-ignore
 import Auth from '../views/Auth.vue'
+import Profile from '../views/profile.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: '/auth',
       name: 'auth',
       component: Auth
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
     }
   ]
 })
